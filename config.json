@@ -1,0 +1,10 @@
+{
+  "voiceDesign": "二十五六岁的年轻女性，御姐音，中低音区，嗓音偏暖、略带一点沙，厚而不闷。语气温柔而笃定，不刻意放软。语速偏快，句子之间留出停顿，收尾往下沉。像深夜电台里那个压着嗓子、只对一个人说话的主持人。",
+  "autoSpeak": true,
+  "alertOnApproval": true,
+  "voiceMode": "design",
+  "sampleFile": "D:\\workspace\\projects\\dsh-mimo-voice\\audio\\sample.mp3",
+  "baseURL": "https://api.xiaomimimo.com/v1",
+  "model": "mimo-v2.5-tts-voicedesign",
+  "maxTextLength": 600
+}

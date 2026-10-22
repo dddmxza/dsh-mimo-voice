@@ -1,0 +1,10 @@
+{
+  "voiceDesign": "三十二岁左右的成年女性，中低音，嗓音偏磁、带一点烟嗓的毛边，厚而不浑。语气从容带点居高临下，不撒娇不哄人，句尾停顿利落。语速中等偏慢，重音落在句尾，像懒得解释第二遍。",
+  "autoSpeak": false,
+  "alertOnApproval": false,
+  "voiceMode": "design",
+  "sampleFile": "",
+  "baseURL": "https://api.xiaomimimo.com/v1",
+  "model": "mimo-v2.5-tts-voicedesign",
+  "maxTextLength": 600
+}

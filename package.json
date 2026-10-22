@@ -1,10 +1,10 @@
 {
   "name": "dsh-mimo-voice",
   "version": "0.1.0",
-  "private": true,
+  "description": "Xiaomi MiMo TTS voice plugin for DeepSeek Harness: speak a chosen line through the local speakers, with API key / voice design / preview controls in settings.",
+  "license": "Apache-2.0",
   "type": "module",
   "main": "lib/index.js",
-  "description": "Xiaomi MiMo TTS voice plugin for DeepSeek Harness: speak a chosen line through the local speakers, with API key / voice design / preview controls in settings.",
   "exports": {
     ".": "./lib/index.js",
     "./client": "./lib/client.js",
@@ -13,8 +13,26 @@
   },
   "files": [
     "lib",
-    "cordis.patch.yml"
+    "cordis.patch.yml",
+    "README.md"
   ],
+  "keywords": [
+    "dsh",
+    "deepseek-harness",
+    "dsh-plugin",
+    "tts",
+    "mimo",
+    "xiaomi",
+    "voice"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dddmxza/dsh-mimo-voice.git"
+  },
+  "homepage": "https://github.com/dddmxza/dsh-mimo-voice#readme",
+  "bugs": {
+    "url": "https://github.com/dddmxza/dsh-mimo-voice/issues"
+  },
   "dsh": {
     "bundle": {
       "patch": "./cordis.patch.yml"

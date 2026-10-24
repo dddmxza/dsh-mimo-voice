@@ -1,7 +1,14 @@
 {
   "voiceDesign": "二十五六岁的年轻女性，御姐音，中低音区，嗓音偏暖、略带一点沙，厚而不闷。语气温柔而笃定，不刻意放软。语速偏快，句子之间留出停顿，收尾往下沉。像深夜电台里那个压着嗓子、只对一个人说话的主持人。",
-  "autoSpeak": true,
+  "autoSpeak": false,
   "alertOnApproval": true,
+  "approvalLines": [
+    "（语速快，很焦急）这边卡住了，等你点一下。",
+    "（小声）那个审批还开着呢，要不要我先等着。",
+    "（语气平缓，慢慢说）有个事需要你点一下才能往下走。",
+    "（先装作很急）不好了，卡住了……其实也不太急，你慢慢来。",
+    "（故意压低声音，像说悄悄话）点一下那个审批按钮吧，我等你很久了。"
+  ],
   "voiceMode": "design",
   "sampleFile": "D:\\workspace\\projects\\dsh-mimo-voice\\audio\\sample.mp3",
   "baseURL": "https://api.xiaomimimo.com/v1",

@@ -1,6 +1,6 @@
 {
   "name": "dsh-mimo-voice",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Xiaomi MiMo TTS voice plugin for DeepSeek Harness: speak a chosen line through the local speakers, with API key / voice design / preview controls in settings.",
   "license": "Apache-2.0",
   "type": "module",
@@ -39,7 +39,9 @@
     },
     "client": {
       "platform": "web",
-      "inject": ["slots"]
+      "inject": [
+        "slots"
+      ]
     }
   },
   "dependencies": {

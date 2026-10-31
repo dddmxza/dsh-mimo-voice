@@ -16,10 +16,13 @@ const ROOT = path.resolve(HERE, '..')
 const tools = []
 const routes = []
 const events = []
+const sections = []
 const ctx = {
   on: (name, fn) => { events.push({ name, fn }); return () => {} },
+  effect: (fn) => { fn(); return () => {} },
   tools: { register: (t) => { tools.push(t); return () => {} } },
   webServer: { register: (r) => { routes.push(r); return () => {} } },
+  systemPrompt: { section: (s) => { sections.push(s); return () => {} } },
 }
 
 const mod = await import(pathToFileURL(path.join(ROOT, 'lib/index.js')).href)
@@ -28,6 +31,21 @@ mod.apply(ctx)
 assert.equal(mod.name, 'dsh-mimo-voice')
 assert.equal(typeof mod.inject, 'object')
 console.log('监听 OK：', events.map((e) => e.name).join(' | '))
+
+// 提示词注入：只该有一节，且 text 是函数（每轮现读开关）
+assert.equal(sections.length, 1, '应当注入 1 节提示词')
+const sec = sections[0]
+assert.equal(sec.name, 'dsh-mimo-voice:speak-policy')
+assert.equal(sec.order, 300)
+assert.equal(sec.interpolate, false, '规则里有花括号，不能走插值')
+assert.equal(typeof sec.text, 'function', 'text 要传函数，改开关才不用重启')
+const injected = sec.text()
+assert.equal(typeof injected, 'string')
+if (injected !== '') {
+  assert.ok(injected.includes('## 出声'), '落进去的要带节标题')
+  assert.ok(injected.includes('speak'), '得提到 speak')
+}
+console.log('注入 OK：', sec.name, '| order', sec.order, '| 本轮长度', injected.length)
 
 assert.equal(tools.length, 1, '应当注册 1 个工具')
 const speak = tools[0]

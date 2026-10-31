@@ -35,12 +35,14 @@ pnpm --dir C:\Users\<你>\.dsh\profiles\desktop add link:D:/path/to/dsh-mimo-voi
 
 插件**不替人挑句子**。它只往系统提示词里塞一节，告诉模型：这机器接着音箱，每回一条消息都挑一句最要紧的交给 `speak`，语气写在 `text` 开头的括号里，正文不写记号。
 
-设置页那个开关管的是「**塞不塞**」，不是「念不念」：
+设置页那个开关是**总闸**，管两件事：
 
-- 开着 → 每轮拼提示词时把这一节拼进去；
-- 关了 → 那一节返回空串，本轮提示词里没有它。`speak` 工具仍在工具列表里，只是没人提醒。关掉一般是因为这会儿不方便出声。
+- **提示词**：开着 → 每轮拼提示词时把这一节拼进去；关了 → 那一节返回空串，本轮提示词里没有它。
+- **工具**：`speak` 的 `execute` 第一行就查这个开关，关着直接返回「出声关着，这次没念」，**不调 TTS**。
 
-实现上走 `ctx.systemPrompt.section({ name, order: 300, interpolate: false, text })`，`text` 传的是**函数**而不是字符串：每次拼提示词现读 `config.json` 的 `speakPrompt`，所以改开关**不用重启 DSH**。`interpolate: false` 是因为规则里有花括号，不能让提示词引擎去插值。
+所以关掉以后不是「没人提醒但还能念」，是真的一点声音都出不来。关掉一般是因为这会儿不方便出声。
+
+实现上走 `ctx.systemPrompt.section({ name, order: 3250, interpolate: false, text })`，`text` 传的是**函数**而不是字符串：每次拼提示词现读 `config.json` 的 `speakPrompt`，所以改开关**不用重启 DSH**。`interpolate: false` 是因为规则里有花括号，不能让提示词引擎去插值。**顺位压到最后（3250）**：这条规则得在生成之前还在眼前，排在前面会被后面几万字冲淡。
 
 规则正文见 `lib/index.js` 的 `SPEAK_POLICY`。
 

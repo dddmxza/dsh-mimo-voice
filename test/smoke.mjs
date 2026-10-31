@@ -36,7 +36,7 @@ console.log('监听 OK：', events.map((e) => e.name).join(' | '))
 assert.equal(sections.length, 1, '应当注入 1 节提示词')
 const sec = sections[0]
 assert.equal(sec.name, 'dsh-mimo-voice:speak-policy')
-assert.equal(sec.order, 300)
+assert.equal(sec.order, 3250, '顺位压到最后，紧贴生成之前')
 assert.equal(sec.interpolate, false, '规则里有花括号，不能走插值')
 assert.equal(typeof sec.text, 'function', 'text 要传函数，改开关才不用重启')
 const injected = sec.text()
@@ -83,6 +83,16 @@ assert.equal(typeof captured.config.hasKey, 'boolean')
 assert.ok(!('apiKey' in captured.config), 'apiKey 原文不能出现在响应里')
 assert.ok(captured.config.previewText.includes('红豆生南国'))
 console.log('配置 OK：hasKey =', captured.config.hasKey, '| 音频目录', captured.config.audioDir)
+
+// 开关关着的时候，speak 必须直接拒绝，不许调 TTS
+if (captured.config.speakPrompt !== true) {
+  const denied = await speak.execute({ text: '这句不该被念出来。' }, {})
+  assert.equal(denied.success, false, '开关关着还念了')
+  assert.match(denied.message, /关着/, '拒绝理由要说清是关着')
+  console.log('拒绝 OK：', denied.message)
+} else {
+  console.log('拒绝 跳过：开关此刻是开的')
+}
 
 if (process.argv.includes('--speak')) {
   const result = await speak.execute({ text: '嗯，我在。', wait: true }, {})

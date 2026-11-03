@@ -19,7 +19,8 @@
   "breezeLanguage": "zh",
   "breezeGuidance": 0,
   "maxTextLength": 600,
-  "output": "local",
+  "output": "board",
   "boardUrl": "http://192.168.31.123",
-  "boardFallback": true
+  "boardFallback": true,
+  "boardNormalize": true
 }
